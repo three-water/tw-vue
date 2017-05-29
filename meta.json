@@ -1,0 +1,26 @@
+{
+  "prompts": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "message": "Project name"
+    },
+    "description": {
+      "type": "string",
+      "required": true,
+      "message": "Project description",
+      "default": "A Vue.js project"
+    },
+    "type": {
+      "type": "list",
+      "required": true,
+      "message": "for PC or Mobile ?",
+      "choices": [ "PC", "Mobile" ]
+    },
+    "author": {
+      "type": "string",
+      "label": "Author"
+    }
+  },
+  "completeMessage": "To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dev"
+}
