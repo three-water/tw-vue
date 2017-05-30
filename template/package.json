@@ -2,7 +2,7 @@
   "name": "{{name}}",
   "version": "1.0.0",
   "description": "{{description}}",
-  "author": "laughmaker <wskrdfeai@gmail.com>",
+  "author": "{{Author}}",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
