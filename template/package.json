@@ -9,7 +9,7 @@
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
-  {{#if type=="PC"}}
+  {{#if_eq type "PC"}}
   "dependencies": {
     "ansi-html": "0.0.7",
     "ansi-regex": "^2.1.1",
@@ -26,7 +26,8 @@
     "vue-router": "^2.2.0",
     "zrender": "^3.4.2"
   },
-  {{else if type=="Mobile"}}
+  {{/if_eq}}
+  {{#if_eq type "Mobile"}}
    "dependencies": {
     "ansi-html": "0.0.7",
     "ansi-regex": "^2.1.1",
@@ -44,7 +45,7 @@
     "vue-router": "^2.2.0",
     "zrender": "^3.4.2"
   },
-  {{/if}}
+  {{/if_eq}}
   "devDependencies": {
     "autoprefixer": "^6.7.2",
     "babel-core": "^6.22.1",
