@@ -4,5 +4,5 @@ tw vue project template
 ## quick start
 
 ```
-vue init three-water/tw-vue + project-name
+vue init three-water/tw-vue <project-name>
 ```
