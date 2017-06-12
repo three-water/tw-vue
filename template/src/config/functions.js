@@ -1,11 +1,11 @@
 import Vue from 'vue'
 
-// 定义POST请求方法
+// 定义POST请求方法response.json()
 function post (action, params) {
-  if (lgetItem(Vue.TOKEN_KEY)) {
-    Vue.http.headers.post['token'] = lgetItem(Vue.TOKEN_KEY)
-  }
-  return Vue.http.post(action, params).then((response) => response.json(), (error) => {
+  axios.defaults.headers['token'] = config.TOKEN || ''
+  return axios.post(action, params).then((response) => {
+    return response.data
+  }, (error) => {
     console.log(error)
     return error
   })

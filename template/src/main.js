@@ -2,6 +2,19 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+{{#if_eq type "PC"}}
+// 引入element-ui
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
+Vue.use(ElementUI)
+
+{{/if_eq}}
+// 配置网络请求
+import axios from 'axios'
+
+axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+axios.defaults.baseURL = Vue.HOST_SITE
+
 import Mint from 'mint-ui'
 Vue.use(Mint)
 import 'mint-ui/lib/style.css'
