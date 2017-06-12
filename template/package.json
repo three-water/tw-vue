@@ -25,7 +25,9 @@
     "vue-lazyload": "^1.0.1",
     "vue-resource": "^1.2.0",
     "vue-router": "^2.2.0",
-    "zrender": "^3.4.2"
+    "zrender": "^3.4.2",
+    "vueditor": "^0.2.4",
+    "vuex": "^2.3.1"
   },
   {{/if_eq}}
   {{#if_eq type "Mobile"}}
