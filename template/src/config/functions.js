@@ -1,13 +1,46 @@
 import Vue from 'vue'
+import * as config from './constants'
+import axios from 'axios'
+import api from '../api'
+{{#if_eq type "Mobile"}}
+import { Toast } from 'mint-ui'
+Vue.prototype.$toast = Toast
+{{/if_eq}}
 
 // 定义POST请求方法response.json()
 function post (action, params) {
-  axios.defaults.headers['token'] = config.TOKEN || ''
-  return axios.post(action, params).then((response) => {
-    return response.data
-  }, (error) => {
-    console.log(error)
-    return error
+  if (api[action] === undefined) {
+    console.error(`非法的url: ${action},请在api中配置后使用`)
+  }
+  let url = config + api(action).url
+  return new Promise((resolve, reject) => {
+    axios.post(url, params).then((response) => {
+      let resp = response.body
+      if (resp.status === config.SUCCESS) {
+        resolve(resp)
+      } else {
+        let msg = resp.message
+        let msgArr = []
+        try {
+          let m = JSON.parse(msg)
+          for (let k in m) {
+            msgArr.push(m[k])
+          }
+        } catch (e) {
+          msgArr = [msg]
+        }
+        {{#if_eq type "Mobile"}}
+        Toast('请求失败，请稍后重试')
+        {{/if_eq}}
+        reject(resp)
+      }
+    }, (error) => {
+      console.log(error)
+      {{#if_eq type "Mobile"}}
+      Toast('请求失败，请稍后重试')
+      {{/if_eq}}
+      reject(error)
+    })
   })
 }
 
@@ -72,53 +105,6 @@ function redirectHome () {
   window.location.href = '/'
 }
 
-function fileType (extension) {
-  if (!extension) {
-    return 'other'
-  }
-  let type = 'other'
-  switch (extension.toString().toLowerCase()) {
-    case 'pdf':
-      type = 'pdf'
-      break
-    case 'doc':
-    case 'docx':
-      type = 'doc'
-      break
-    case 'png':
-    case 'jpg':
-    case 'jpeg':
-    case 'gif':
-    case 'bmp':
-      type = 'img'
-      break
-    case 'mp3':
-    case 'wav':
-      type = 'audio'
-      break
-    case 'ppt':
-    case 'pptx':
-      type = 'ppt'
-      break
-    case 'mp4':
-    case 'rmvb':
-    case 'rm':
-    case 'avi':
-    case 'mpeg4':
-    case 'wmv':
-    case 'mov':
-      type = 'video'
-      break
-    case 'xls':
-    case 'xlsx':
-      type = 'xls'
-      break
-    default:
-      break
-  }
-  return type
-}
-
 function getQueryString (name) {
   var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
   var r = window.location.hash.substr(1).match(reg)
@@ -128,5 +114,5 @@ function getQueryString (name) {
 }
 
 export {
-  post, formatDate, formatFileSize, ssetItem, sgetItem, lsetItem, lgetItem, srmItem, lrmItem, redirectHome, fileType, redirect, getQueryString
+  post, formatDate, formatFileSize, ssetItem, sgetItem, lsetItem, lgetItem, srmItem, lrmItem, redirectHome, redirect, getQueryString
 }
