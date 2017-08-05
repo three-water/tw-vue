@@ -17,10 +17,10 @@ const REDIRECT_URL_KEY = 'redirect_url_dsfdsf'
 const DOCTOR_INFO_KEY = 'doctor_info_dsfdsf'
 
 // 定义状态码
-const SUCCESS = 1
+const SUCCESS = 2000
 
 // 定义每一页数据
-const PAGE_ROWS = 20
+const PAGE_ROWS = 15
 
 const OFFICE_WEB_ID = 11181
 
